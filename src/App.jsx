@@ -1,17 +1,22 @@
 import './App.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { increment, decrement, reset } from './utils/counterSlice';
+
+import { NavLink } from "react-router";
+import { BrowserRouter, Route, Routes } from 'react-router'
+import UserDetails from './components/UserDetails.jsx'
+import Counter from './components/Counter.jsx';
+
 function App() {
-
-  const counter = useSelector((store) => store.counter)
-  const dispatch = useDispatch();
-
   return (
     <>
-      <div> <h2>Count: {counter}</h2>  </div>
-      <button onClick={() => { dispatch(increment()) }}>Increment</button>
-      <button onClick={() => { dispatch(decrement()) }}>Decrement</button>
-      <button onClick={() => { dispatch(reset()) }}>Reset</button>
+      <BrowserRouter>
+        <NavLink className="app-links" to="/">Counter</NavLink>
+        <NavLink className="app-links" to="/userDetails">User Details</NavLink>
+        <Routes>
+          <Route path="/" element={<Counter/>}></Route>
+          <Route path="/userDetails" element={<UserDetails />}></Route>
+        </Routes>
+      </BrowserRouter>
+
     </>
   )
 }
